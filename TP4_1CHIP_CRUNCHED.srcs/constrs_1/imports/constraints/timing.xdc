@@ -1,0 +1,88 @@
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]
+set_property BITSTREAM.CONFIG.SPI_32BIT_ADDR YES [current_design]
+
+create_clock -period 6.250 -name GT_REFCLK_P -waveform {0.000 3.125} [get_ports GT_REFCLK_P]
+create_clock -period 25.000 -name SC_CLK_OUT_P -waveform {0.000 12.500} [get_ports SC_CLK_OUT_P]
+
+
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/mod0/inst/RX_BOT/aurora_64b66b_0_multi_gt_i/GTY_BOT.aurora_64b66b_0_gt_i/inst/gen_gtwizard_gtye4_top.aurora_64b66b_0_gt_bot_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[1].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/RXOUTCLK}]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/mod0/inst/RX_TOP/aurora_64b66b_0_multi_gt_i/GTY_BLOCK_TOP.aurora_64b66b_0_gt_i/inst/gen_gtwizard_gtye4_top.aurora_64b66b_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[0].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/RXOUTCLK}]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/cmac_usplus_0/inst/design_1_cmac_usplus_0_0_gt_i/inst/gen_gtwizard_gtye4_top.design_1_cmac_usplus_0_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[8].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK}]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT3]] -to [get_clocks -of_objects [get_pins {design_1_i/cmac_usplus_0/inst/design_1_cmac_usplus_0_0_gt_i/inst/gen_gtwizard_gtye4_top.design_1_cmac_usplus_0_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[8].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK}]]
+
+set_false_path -from [get_clocks -of_objects [get_pins {design_1_i/cmac_usplus_0/inst/design_1_cmac_usplus_0_0_gt_i/inst/gen_gtwizard_gtye4_top.design_1_cmac_usplus_0_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[8].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK}]] -to [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT3]]
+
+
+
+set_property DIFF_TERM_ADV TERM_NONE [get_ports sgmii_phyclk_clk_p]
+set_property DIFF_TERM_ADV TERM_NONE [get_ports sgmii_phyclk_clk_n]
+
+#8/28/2026 Added these using the constraints wizard
+set_clock_groups -asynchronous -group [get_clocks gtwiz_userclk_rx_srcclk_in] -group [get_clocks clk_20_design_1_clk_wiz_1_0]
+set_clock_groups -asynchronous -group [get_clocks gtwiz_userclk_rx_srcclk_in_1] -group [get_clocks clk_20_design_1_clk_wiz_1_0]
+set_clock_groups -asynchronous -group [get_clocks {gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST_2}] -group [get_clocks clk_20_design_1_clk_wiz_1_0]
+set_clock_groups -asynchronous -group [get_clocks {gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST_2_1}] -group [get_clocks clk_20_design_1_clk_wiz_1_0]
+set_clock_groups -asynchronous -group [get_clocks {gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST_3}] -group [get_clocks clk_20_design_1_clk_wiz_1_0]
+set_clock_groups -asynchronous -group [get_clocks {gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST_3_1}] -group [get_clocks clk_20_design_1_clk_wiz_1_0]
+set_clock_groups -asynchronous -group [get_clocks clk_20_design_1_clk_wiz_1_0] -group [get_clocks gtwiz_userclk_rx_srcclk_in]
+set_clock_groups -asynchronous -group [get_clocks clk_20_design_1_clk_wiz_1_0] -group [get_clocks gtwiz_userclk_rx_srcclk_in_1]
+
+
+
+#8/18/2026 Added these using constraints wizard.  I think they're not important
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 5.000 [get_ports IIC_0_scl_io]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 5.000 [get_ports IIC_0_scl_io]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 5.000 [get_ports IIC_0_sda_io]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 5.000 [get_ports IIC_0_sda_io]
+set_input_delay -clock [get_clocks SC_CLK_OUT_P] -clock_fall -min -add_delay 5.000 [get_ports SC_DATA_OUT_P]
+set_input_delay -clock [get_clocks SC_CLK_OUT_P] -clock_fall -max -add_delay 5.000 [get_ports SC_DATA_OUT_P]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 5.000 [get_ports mdio_mdc_mdio_io]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 5.000 [get_ports mdio_mdc_mdio_io]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 5.000 [get_ports pwr_good]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 5.000 [get_ports pwr_good]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 5.000 [get_ports reset_0]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 5.000 [get_ports reset_0]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 5.000 [get_ports rs232_uart_0_rxd]
+set_input_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 5.000 [get_ports rs232_uart_0_rxd]
+create_clock -period 25.000 -name VIRTUAL_clk_40_design_1_clk_wiz_1_0 -waveform {0.000 12.500}
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports {digitalpixel_b[*]}]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports {digitalpixel_b[*]}]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports {digitalpixel_t[*]}]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports {digitalpixel_t[*]}]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports {led_8bits_tri_o[*]}]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports {led_8bits_tri_o[*]}]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports IIC_0_scl_io]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports IIC_0_scl_io]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports IIC_0_sda_io]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports IIC_0_sda_io]
+set_output_delay -clock [get_clocks VIRTUAL_clk_40_design_1_clk_wiz_1_0] -clock_fall -min -add_delay 0.000 [get_ports SC_data_in_N]
+set_output_delay -clock [get_clocks VIRTUAL_clk_40_design_1_clk_wiz_1_0] -clock_fall -max -add_delay 5.000 [get_ports SC_data_in_N]
+set_output_delay -clock [get_clocks VIRTUAL_clk_40_design_1_clk_wiz_1_0] -clock_fall -min -add_delay 0.000 [get_ports SC_data_in_P]
+set_output_delay -clock [get_clocks VIRTUAL_clk_40_design_1_clk_wiz_1_0] -clock_fall -max -add_delay 5.000 [get_ports SC_data_in_P]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports T0_sync_N]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports T0_sync_N]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports T0_sync_P]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports T0_sync_P]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports mdio_mdc_mdc]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports mdio_mdc_mdc]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports mdio_mdc_mdio_io]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports mdio_mdc_mdio_io]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports qsfp3_lpmode]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports qsfp3_lpmode]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports qsfp3_resetl]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports qsfp3_resetl]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports reset_N]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports reset_N]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports reset_P]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports reset_P]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports rs232_uart_0_txd]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports rs232_uart_0_txd]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports shutter_N]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports shutter_N]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports shutter_P]
+set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports shutter_P]
+
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks CLK_IN1_D_0_clk_p]

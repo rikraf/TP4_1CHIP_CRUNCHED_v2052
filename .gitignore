@@ -1,0 +1,9 @@
+TP4_1CHIP_CRUNCHED.cache
+TP4_1CHIP_CRUNCHED.gen
+TP4_1CHIP_CRUNCHED.runs
+TP4_1CHIP_CRUNCHED.archive
+*.jou
+*.log
+TP4_1CHIP_CRUNCHED.mcs
+TP4_1CHIP_CRUNCHED.prm
+design_1_wrapper_out.bit

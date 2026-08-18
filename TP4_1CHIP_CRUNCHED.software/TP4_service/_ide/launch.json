@@ -1,0 +1,45 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "tcf-debug",
+			"request": "launch",
+			"name": "TP4_service_app_hw_1",
+			"debugType": "baremetal-fpga",
+			"attachToRunningTargetOptions": {
+				"targetSetupMode": "standalone",
+				"executeScript": true,
+				"scriptPath": ""
+			},
+			"autoAttachProcessChildren": false,
+			"target": {
+				"targetConnectionId": "Local",
+				"peersIniPath": "../../_ide/.peers.ini",
+				"context": "fpga"
+			},
+			"pathMap": [],
+			"targetSetup": {
+				"resetSystem": true,
+				"programDevice": false,
+				"partialBitstream": false,
+				"skipRevisionCheck": false,
+				"device": {
+					"plDevice": "Auto Detect",
+					"psDevice": "Auto Detect"
+				},
+				"bitstreamFile": "/home/richardraffanti/xilproj/TP4_1CHIP_RAW_V20252/TP4_1CHIP_RAW_V20252.configfiles/TP4_1CHIP_RAW_09a.bit",
+				"downloadElf": [
+					{
+						"core": "microblaze_riscv_0",
+						"resetProcessor": true,
+						"elfFile": "${workspaceFolder}/TP4_service/build/TP4_raw.elf",
+						"stopAtEntry": false,
+						"isSelfRelocatingApp": false,
+						"relativeAddress": ""
+					}
+				]
+			},
+			"internalConsoleOptions": "openOnSessionStart"
+		}
+	]
+}
