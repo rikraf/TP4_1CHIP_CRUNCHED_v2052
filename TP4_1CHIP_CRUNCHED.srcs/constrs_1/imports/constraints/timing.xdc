@@ -8,13 +8,17 @@ create_clock -period 6.250 -name GT_REFCLK_P -waveform {0.000 3.125} [get_ports 
 create_clock -period 25.000 -name SC_CLK_OUT_P -waveform {0.000 12.500} [get_ports SC_CLK_OUT_P]
 
 
-set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/mod0/inst/RX_BOT/aurora_64b66b_0_multi_gt_i/GTY_BOT.aurora_64b66b_0_gt_i/inst/gen_gtwizard_gtye4_top.aurora_64b66b_0_gt_bot_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[1].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/RXOUTCLK}]]
-set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/mod0/inst/RX_TOP/aurora_64b66b_0_multi_gt_i/GTY_BLOCK_TOP.aurora_64b66b_0_gt_i/inst/gen_gtwizard_gtye4_top.aurora_64b66b_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[0].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/RXOUTCLK}]]
 set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/cmac_usplus_0/inst/design_1_cmac_usplus_0_0_gt_i/inst/gen_gtwizard_gtye4_top.design_1_cmac_usplus_0_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[8].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK}]]
 set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT3]] -to [get_clocks -of_objects [get_pins {design_1_i/cmac_usplus_0/inst/design_1_cmac_usplus_0_0_gt_i/inst/gen_gtwizard_gtye4_top.design_1_cmac_usplus_0_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[8].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK}]]
 
 set_false_path -from [get_clocks -of_objects [get_pins {design_1_i/cmac_usplus_0/inst/design_1_cmac_usplus_0_0_gt_i/inst/gen_gtwizard_gtye4_top.design_1_cmac_usplus_0_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[8].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK}]] -to [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT3]]
 
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks CLK_IN1_D_0_clk_p]
+
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT3]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/tp4_HS_2pair_readout/inst/RX_BOT/aurora_64b66b_0_multi_gt_i/GTY_BOT.aurora_64b66b_0_gt_i/inst/gen_gtwizard_gtye4_top.aurora_64b66b_0_gt_bot_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[1].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/RXOUTCLK}]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins {design_1_i/tp4_HS_2pair_readout/inst/RX_TOP/aurora_64b66b_0_multi_gt_i/GTY_BLOCK_TOP.aurora_64b66b_0_gt_i/inst/gen_gtwizard_gtye4_top.aurora_64b66b_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[0].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[0].GTYE4_CHANNEL_PRIM_INST/RXOUTCLK}]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT3]] -to [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]]
 
 
 set_property DIFF_TERM_ADV TERM_NONE [get_ports sgmii_phyclk_clk_p]
@@ -85,4 +89,3 @@ set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [ge
 set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -min -add_delay 0.000 [get_ports shutter_P]
 set_output_delay -clock [get_clocks CLK_IN1_D_0_clk_p] -max -add_delay 2.000 [get_ports shutter_P]
 
-set_false_path -from [get_clocks -of_objects [get_pins design_1_i/clk_wiz_1/inst/mmcme4_adv_inst/CLKOUT0]] -to [get_clocks CLK_IN1_D_0_clk_p]

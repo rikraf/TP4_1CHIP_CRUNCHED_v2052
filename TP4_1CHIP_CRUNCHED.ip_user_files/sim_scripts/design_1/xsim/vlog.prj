@@ -1,8 +1,7 @@
-verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/a415" \
+verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a415" \
 "../../../bd/design_1/ip/design_1_lmb_bram_0/sim/design_1_lmb_bram_0.v" \
-"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/sim/bd_4194.v" \
 
-sv xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/a415" \
+sv xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a415" \
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_2/sim/bd_4194_arinsw_0.sv" \
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_3/sim/bd_4194_rinsw_0.sv" \
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_4/sim/bd_4194_awinsw_0.sv" \
@@ -111,9 +110,35 @@ sv xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --incl
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_107/sim/bd_4194_m11wn_0.sv" \
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_108/sim/bd_4194_m11bn_0.sv" \
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_109/sim/bd_4194_m11e_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_110/sim/bd_4194_m12s2a_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_111/sim/bd_4194_m12arn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_112/sim/bd_4194_m12rn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_113/sim/bd_4194_m12awn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_114/sim/bd_4194_m12wn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_115/sim/bd_4194_m12bn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_116/sim/bd_4194_m12e_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_117/sim/bd_4194_m13s2a_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_118/sim/bd_4194_m13arn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_119/sim/bd_4194_m13rn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_120/sim/bd_4194_m13awn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_121/sim/bd_4194_m13wn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_122/sim/bd_4194_m13bn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_123/sim/bd_4194_m13e_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_124/sim/bd_4194_m14s2a_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_125/sim/bd_4194_m14arn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_126/sim/bd_4194_m14rn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_127/sim/bd_4194_m14awn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_128/sim/bd_4194_m14wn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_129/sim/bd_4194_m14bn_0.sv" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/ip/ip_130/sim/bd_4194_m14e_0.sv" \
+
+verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a415" \
+"../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/bd_0/sim/bd_4194.v" \
+
+sv xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a415" \
 "../../../bd/design_1/ip/design_1_microblaze_riscv_0_axi_periph_0/sim/design_1_microblaze_riscv_0_axi_periph_0.sv" \
 
-verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_RAW_V20252.gen/sources_1/bd/design_1/ipshared/a415" \
+verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" --include "/opt/2025.2/data/xilinx_vip/include" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/00fe/hdl/verilog" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a415" \
 "../../../bd/design_1/ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0_clk_wiz.v" \
 "../../../bd/design_1/ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0.v" \
 "../../../bd/design_1/ip/design_1_axi_ethernet_0_0/bd_0/ip/ip_1/synth/common/bd_929b_mac_0_block_sync_block.v" \
@@ -138,7 +163,6 @@ verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" -
 "../../../bd/design_1/ip/design_1_axi_ethernet_0_0/bd_0/ip/ip_2/synth/bd_929b_pcs_pma_0_block.v" \
 "../../../bd/design_1/ip/design_1_axi_ethernet_0_0/bd_0/ip/ip_2/synth/bd_929b_pcs_pma_0.v" \
 "../../../bd/design_1/ip/design_1_axi_ethernet_0_0/bd_0/ip/ip_9/sim/bd_929b_util_vector_logic_0_0.v" \
-"/home/richardraffanti/xilproj/TP4_1CHIP_RAW_2026/TP4_100Gb.gen/sources_1/bd/design_1/ip/design_1_axi_ethernet_0_0/bd_0/synth/bd_929b.v" \
 "../../../bd/design_1/ip/design_1_axi_ethernet_0_0/bd_0/sim/bd_929b.v" \
 "../../../bd/design_1/ip/design_1_axi_ethernet_0_0/sim/design_1_axi_ethernet_0_0.v" \
 "../../../bd/design_1/ip/design_1_cmac_usplus_0_0/ip_0/sim/gtwizard_ultrascale_v1_7_gtye4_channel.v" \
@@ -160,6 +184,12 @@ verilog xil_defaultlib -i "../../../../../../../../opt/2025.2/data/rsb/busdef" -
 "../../../bd/design_1/ip/design_1_timepix4_sc_in_AXI_0_0/sim/design_1_timepix4_sc_in_AXI_0_0.v" \
 "../../../bd/design_1/ip/design_1_mod0_0/sim/design_1_mod0_0.v" \
 "../../../bd/design_1/ip/design_1_digpix_select_0_0/sim/design_1_digpix_select_0_0.v" \
+"../../../bd/design_1/ip/design_1_axis_bypass_0_0/sim/design_1_axis_bypass_0_0.v" \
+"../../../bd/design_1/ip/design_1_tp4_strip_pad_0_0/sim/design_1_tp4_strip_pad_0_0.v" \
+"../../../bd/design_1/ip/design_1_strip_bits_0_0/sim/design_1_strip_bits_0_0.v" \
+"../../../bd/design_1/ip/design_1_axis_bypass_0_1/sim/design_1_axis_bypass_0_1.v" \
+"../../../bd/design_1/ip/design_1_centroid_gpio_breako_0_0/sim/design_1_centroid_gpio_breako_0_0.v" \
+"../../../bd/design_1/ip/design_1_div_wrapper_0_0/sim/design_1_div_wrapper_0_0.v" \
 "../../../bd/design_1/sim/design_1.v" \
 
 verilog xil_defaultlib "glbl.v"

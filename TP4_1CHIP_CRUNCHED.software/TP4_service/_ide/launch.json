@@ -20,14 +20,14 @@
 			"pathMap": [],
 			"targetSetup": {
 				"resetSystem": true,
-				"programDevice": false,
+				"programDevice": true,
 				"partialBitstream": false,
 				"skipRevisionCheck": false,
 				"device": {
 					"plDevice": "Auto Detect",
 					"psDevice": "Auto Detect"
 				},
-				"bitstreamFile": "/home/richardraffanti/xilproj/TP4_1CHIP_RAW_V20252/TP4_1CHIP_RAW_V20252.configfiles/TP4_1CHIP_RAW_09a.bit",
+				"bitstreamFile": "/home/richardraffanti/xilproj/TP4_1CHIP_CRUNCHED/TP4_1CHIP_CRUNCHED.runs/impl_1/design_1_wrapper.bit",
 				"downloadElf": [
 					{
 						"core": "microblaze_riscv_0",

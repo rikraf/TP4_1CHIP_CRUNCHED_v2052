@@ -1,0 +1,11 @@
+===================================
+Configuration Memory information
+===================================
+File Format        MCS
+Interface          SPIX4
+Size               2048M
+Start Address      0x00000000
+End Address        0x7FFFFFFF
+
+Addr1         Addr2         Date                    File(s)
+0x00000000    0x021AED57    Aug 23 17:42:55 2026    ./design_1_wrapper_out.bit

@@ -26,6 +26,30 @@ vhdl xil_defaultlib  \
 "../../../bd/design_1/ip/design_1_axi_gpio_0_1/sim/design_1_axi_gpio_0_1.vhd" \
 "../../../bd/design_1/ip/design_1_axi_uartlite_0_0/sim/design_1_axi_uartlite_0_0.vhd" \
 "../../../bd/design_1/ip/design_1_axi_gpio_0_4/sim/design_1_axi_gpio_0_4.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/6b1c/src/val_lookup.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/6b1c/src/axis_uni_buffer.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/6b1c/sim/test_pkg_v1_0.vhd" \
+"../../../bd/design_1/ipshared/6b1c/src/axis_lut.vhd" \
+"../../../bd/design_1/ip/design_1_AXIS_LUT_0_0/sim/design_1_AXIS_LUT_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_AXIS_LUT_OFFSET_0/sim/design_1_AXIS_LUT_OFFSET_0.vhd" \
+"../../../bd/design_1/ip/design_1_axi_bram_ctrl_0_0/sim/design_1_axi_bram_ctrl_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_axi_bram_ctrl_offset_0/sim/design_1_axi_bram_ctrl_offset_0.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a0e8/src/val_compute.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/a0e8/src/dsp_mult_add.vhd" \
+"../../../bd/design_1/ipshared/a0e8/src/axis_gain_offs.vhd" \
+"../../../bd/design_1/ip/design_1_AXIS_GAIN_OFFS_0_0/sim/design_1_AXIS_GAIN_OFFS_0_0.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/src/acc.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/src/acc_no_dsp.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/src/macc.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/src/pixel_to_centroid.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/src/centroider.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/src/centroid_to_cluster.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/sim/test_pkg_v1_0.vhd" \
+"../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ipshared/df01/sim/centroid_test_pkg.vhd" \
+"../../../bd/design_1/ipshared/df01/src/axis_centroider.vhd" \
+"../../../bd/design_1/ip/design_1_AXIS_CENTROIDER_0_0/sim/design_1_AXIS_CENTROIDER_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_axi_gpio_2_0/sim/design_1_axi_gpio_2_0.vhd" \
+"../../../bd/design_1/ip/design_1_rst_clk_wiz_1_100M_1/sim/design_1_rst_clk_wiz_1_100M_1.vhd" \
 
 # Do not sort compile order
 nosort

@@ -1,7 +1,7 @@
 {
   "name": "TP4_service",
   "type": "HOST",
-  "platform": "platform_01",
+  "platform": "platform",
   "domain": "standalone_microblaze_riscv_0",
   "cpuInstance": "microblaze_riscv_0",
   "cpuType": "microblaze_riscv",

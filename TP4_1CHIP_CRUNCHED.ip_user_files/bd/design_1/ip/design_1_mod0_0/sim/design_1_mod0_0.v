@@ -65,14 +65,17 @@ module design_1_mod0_0 (
   bot_refclk_n,
   init_clk,
   clk100,
+  clk40,
   reset_all,
-  reset_tx_pll_dp,
+  reset_block_sync_sm,
   reset_tx_dp,
   reset_rx_pll_dp,
   reset_rx_dp,
   fifo_reset,
   decode_addr,
   decode_TOTTOA,
+  decode_gray,
+  use_rollover,
   clk322,
   clk200,
   write_header_word,
@@ -84,7 +87,12 @@ module design_1_mod0_0 (
   tx_tready,
   pause,
   fake_rate,
-  idle
+  idle,
+  raw_pixel_tdata,
+  raw_pixel_tval,
+  proc_pixel_tdata,
+  proc_pixel_tval,
+  proc_pixel_tval_width
 );
 
 input wire top_p;
@@ -100,32 +108,35 @@ input wire bot_refclk_n;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME init_clk, FREQ_HZ 20000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN design_1_clk_wiz_1_0_clk_100, INSERT_VIP 0" *)
 input wire init_clk;
 input wire clk100;
+input wire clk40;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_all RST" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_all, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_all, POLARITY ACTIVE_LOW, INSERT_VIP 0, PortWidth 1" *)
 input wire reset_all;
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_tx_pll_dp RST" *)
+(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_block_sync_sm RST" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_tx_pll_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-input wire reset_tx_pll_dp;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_block_sync_sm, POLARITY ACTIVE_LOW, INSERT_VIP 0, PortWidth 1" *)
+input wire reset_block_sync_sm;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_tx_dp RST" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_tx_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_tx_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0, PortWidth 1" *)
 input wire reset_tx_dp;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_rx_pll_dp RST" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_rx_pll_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_rx_pll_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0, PortWidth 1" *)
 input wire reset_rx_pll_dp;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_rx_dp RST" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_rx_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_rx_dp, POLARITY ACTIVE_LOW, INSERT_VIP 0, PortWidth 1" *)
 input wire reset_rx_dp;
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 fifo_reset RST" *)
 (* X_INTERFACE_MODE = "slave" *)
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME fifo_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME fifo_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0, PortWidth 1" *)
 input wire fifo_reset;
 input wire decode_addr;
 input wire decode_TOTTOA;
+input wire decode_gray;
+input wire use_rollover;
 input wire clk322;
 input wire clk200;
 input wire write_header_word;
@@ -145,6 +156,11 @@ input wire tx_tready;
 input wire pause;
 input wire [7 : 0] fake_rate;
 output wire idle;
+output wire [95 : 0] raw_pixel_tdata;
+output wire raw_pixel_tval;
+input wire [127 : 0] proc_pixel_tdata;
+input wire proc_pixel_tval;
+input wire proc_pixel_tval_width;
 
   tp4_2pair_HS_readout #(
     .COMPILE_FOR_SIM(0)
@@ -159,14 +175,17 @@ output wire idle;
     .bot_refclk_n(bot_refclk_n),
     .init_clk(init_clk),
     .clk100(clk100),
+    .clk40(clk40),
     .reset_all(reset_all),
-    .reset_tx_pll_dp(reset_tx_pll_dp),
+    .reset_block_sync_sm(reset_block_sync_sm),
     .reset_tx_dp(reset_tx_dp),
     .reset_rx_pll_dp(reset_rx_pll_dp),
     .reset_rx_dp(reset_rx_dp),
     .fifo_reset(fifo_reset),
     .decode_addr(decode_addr),
     .decode_TOTTOA(decode_TOTTOA),
+    .decode_gray(decode_gray),
+    .use_rollover(use_rollover),
     .clk322(clk322),
     .clk200(clk200),
     .write_header_word(write_header_word),
@@ -178,6 +197,11 @@ output wire idle;
     .tx_tready(tx_tready),
     .pause(pause),
     .fake_rate(fake_rate),
-    .idle(idle)
+    .idle(idle),
+    .raw_pixel_tdata(raw_pixel_tdata),
+    .raw_pixel_tval(raw_pixel_tval),
+    .proc_pixel_tdata(proc_pixel_tdata),
+    .proc_pixel_tval(proc_pixel_tval),
+    .proc_pixel_tval_width(proc_pixel_tval_width)
   );
 endmodule

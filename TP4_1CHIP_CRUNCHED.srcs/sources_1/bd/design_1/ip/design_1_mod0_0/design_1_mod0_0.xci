@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "design_1_mod0_0",
-    "cell_name": "mod0",
+    "cell_name": "tp4_HS_2pair_readout",
     "component_reference": "xilinx.com:module_ref:tp4_2pair_HS_readout:1.0",
     "ip_revision": "1",
     "gen_directory": "../../../../../../TP4_1CHIP_CRUNCHED.gen/sources_1/bd/design_1/ip/design_1_mod0_0",
@@ -50,14 +50,17 @@
         "bot_refclk_n": [ { "direction": "in" } ],
         "init_clk": [ { "direction": "in" } ],
         "clk100": [ { "direction": "in" } ],
+        "clk40": [ { "direction": "in" } ],
         "reset_all": [ { "direction": "in" } ],
-        "reset_tx_pll_dp": [ { "direction": "in" } ],
+        "reset_block_sync_sm": [ { "direction": "in" } ],
         "reset_tx_dp": [ { "direction": "in" } ],
         "reset_rx_pll_dp": [ { "direction": "in" } ],
         "reset_rx_dp": [ { "direction": "in" } ],
         "fifo_reset": [ { "direction": "in" } ],
         "decode_addr": [ { "direction": "in" } ],
         "decode_TOTTOA": [ { "direction": "in" } ],
+        "decode_gray": [ { "direction": "in" } ],
+        "use_rollover": [ { "direction": "in" } ],
         "clk322": [ { "direction": "in" } ],
         "clk200": [ { "direction": "in" } ],
         "write_header_word": [ { "direction": "in" } ],
@@ -69,7 +72,12 @@
         "tx_tready": [ { "direction": "in", "driver_value": "1" } ],
         "pause": [ { "direction": "in" } ],
         "fake_rate": [ { "direction": "in", "size_left": "7", "size_right": "0" } ],
-        "idle": [ { "direction": "out" } ]
+        "idle": [ { "direction": "out" } ],
+        "raw_pixel_tdata": [ { "direction": "out", "size_left": "95", "size_right": "0" } ],
+        "raw_pixel_tval": [ { "direction": "out" } ],
+        "proc_pixel_tdata": [ { "direction": "in", "size_left": "127", "size_right": "0" } ],
+        "proc_pixel_tval": [ { "direction": "in" } ],
+        "proc_pixel_tval_width": [ { "direction": "in" } ]
       },
       "interfaces": {
         "tx": {
@@ -105,7 +113,8 @@
           "mode": "slave",
           "parameters": {
             "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
+            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
+            "PortWidth": [ { "value": "1", "value_src": "default_prop", "value_permission": "bd_and_user", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
             "RST": [ { "physical_name": "fifo_reset" } ]
@@ -117,10 +126,24 @@
           "mode": "slave",
           "parameters": {
             "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
+            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
+            "PortWidth": [ { "value": "1", "value_src": "default_prop", "value_permission": "bd_and_user", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
             "RST": [ { "physical_name": "reset_all" } ]
+          }
+        },
+        "reset_block_sync_sm": {
+          "vlnv": "xilinx.com:signal:reset:1.0",
+          "abstraction_type": "xilinx.com:signal:reset_rtl:1.0",
+          "mode": "slave",
+          "parameters": {
+            "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
+            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
+            "PortWidth": [ { "value": "1", "value_src": "default_prop", "value_permission": "bd_and_user", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ]
+          },
+          "port_maps": {
+            "RST": [ { "physical_name": "reset_block_sync_sm" } ]
           }
         },
         "reset_rx_dp": {
@@ -129,7 +152,8 @@
           "mode": "slave",
           "parameters": {
             "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
+            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
+            "PortWidth": [ { "value": "1", "value_src": "default_prop", "value_permission": "bd_and_user", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
             "RST": [ { "physical_name": "reset_rx_dp" } ]
@@ -141,7 +165,8 @@
           "mode": "slave",
           "parameters": {
             "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
+            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
+            "PortWidth": [ { "value": "1", "value_src": "default_prop", "value_permission": "bd_and_user", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
             "RST": [ { "physical_name": "reset_rx_pll_dp" } ]
@@ -153,22 +178,11 @@
           "mode": "slave",
           "parameters": {
             "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
+            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ],
+            "PortWidth": [ { "value": "1", "value_src": "default_prop", "value_permission": "bd_and_user", "resolve_type": "generated", "format": "long", "is_ips_inferred": true, "is_static_object": false } ]
           },
           "port_maps": {
             "RST": [ { "physical_name": "reset_tx_dp" } ]
-          }
-        },
-        "reset_tx_pll_dp": {
-          "vlnv": "xilinx.com:signal:reset:1.0",
-          "abstraction_type": "xilinx.com:signal:reset_rtl:1.0",
-          "mode": "slave",
-          "parameters": {
-            "POLARITY": [ { "value": "ACTIVE_LOW", "value_permission": "bd_and_user", "resolve_type": "generated", "is_ips_inferred": true, "is_static_object": false } ],
-            "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_ips_inferred": true, "is_static_object": false } ]
-          },
-          "port_maps": {
-            "RST": [ { "physical_name": "reset_tx_pll_dp" } ]
           }
         },
         "init_clk": {
@@ -192,5 +206,5 @@
       }
     }
   },
-  "checksum": "674d9f8f"
+  "checksum": "3470e50f"
 }

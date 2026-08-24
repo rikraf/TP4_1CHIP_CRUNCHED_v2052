@@ -3,7 +3,7 @@
 #define INCLUDE_OTHER_HK
 //#define PRINT_PKT_MSG
 //Comment out for the  RAW hardware
-//#define CRUNCHED
+#define CRUNCHED
 //Timer/Counter Stuff from Vitis 2025.2
 #define TIMER_CNTR_0	 0
 #define INTC		XScuGic
@@ -62,8 +62,8 @@
 #define TEMPSENSOR1 0x48
 #ifdef CRUNCHED
 //The Gain and Offset LUT RAMs for the TOT gain/offset cores
-#define GAIN_BRAM_ADDR XPAR_AXI_BRAM_CTRL_GAIN_S_AXI_BASEADDR
-#define OFFSET_BRAM_ADDR XPAR_AXI_BRAM_CTRL_OFFSET_S_AXI_BASEADDR
+#define GAIN_BRAM_ADDR XPAR_AXI_BRAM_CTRL_GAIN_BASEADDR
+#define OFFSET_BRAM_ADDR XPAR_AXI_BRAM_CTRL_OFFSET_BASEADDR
 //The Centroider addresses- see centroider doc
 #define CENTROID_PORT1_ADDR XPAR_AXI_GPIO_CENTROID_BASEADDR
 #define CENTROID_PORT2_ADDR XPAR_AXI_GPIO_CENTROID_BASEADDR+8

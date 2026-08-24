@@ -340,6 +340,24 @@
             },
             "V11": {
                 "VT": "AC",
+                "BA": "0x40030000",
+                "HA": "0x4003FFFF",
+                "BP": "C_BASEADDR",
+                "HP": "C_HIGHADDR",
+                "MA": "Data",
+                "MX": "/microblaze_riscv_0",
+                "MI": "M_AXI_DP",
+                "MS": "SEG_axi_gpio_centroid_Reg",
+                "MV": "xilinx.com:ip:microblaze_riscv:1.0",
+                "SX": "/axi_gpio_centroid",
+                "SI": "S_AXI",
+                "SS": "Reg",
+                "SV": "xilinx.com:ip:axi_gpio:2.0",
+                "TM": "data",
+                "TU": "register"
+            },
+            "V12": {
+                "VT": "AC",
                 "BA": "0x40600000",
                 "HA": "0x4060FFFF",
                 "BP": "C_BASEADDR",
@@ -356,7 +374,7 @@
                 "TM": "data",
                 "TU": "register"
             },
-            "V12": {
+            "V13": {
                 "VT": "AC",
                 "BA": "0x40800000",
                 "HA": "0x4080FFFF",
@@ -374,7 +392,7 @@
                 "TM": "data",
                 "TU": "register"
             },
-            "V13": {
+            "V14": {
                 "VT": "AC",
                 "BA": "0x40C00000",
                 "HA": "0x40C3FFFF",
@@ -392,7 +410,7 @@
                 "TM": "data",
                 "TU": "register"
             },
-            "V14": {
+            "V15": {
                 "VT": "AC",
                 "BA": "0x41200000",
                 "HA": "0x4120FFFF",
@@ -411,7 +429,7 @@
                 "TM": "data",
                 "TU": "register"
             },
-            "V15": {
+            "V16": {
                 "VT": "AC",
                 "BA": "0x41C00000",
                 "HA": "0x41C0FFFF",
@@ -429,7 +447,7 @@
                 "TM": "data",
                 "TU": "register"
             },
-            "V16": {
+            "V17": {
                 "VT": "AC",
                 "BA": "0x44A00000",
                 "HA": "0x44A0FFFF",
@@ -446,6 +464,42 @@
                 "SV": "xilinx.com:ip:axi_fifo_mm_s:4.3",
                 "TM": "data",
                 "TU": "register"
+            },
+            "V18": {
+                "VT": "AC",
+                "BA": "0xC0000000",
+                "HA": "0xC007FFFF",
+                "BP": "C_S_AXI_BASEADDR",
+                "HP": "C_S_AXI_HIGHADDR",
+                "MA": "Data",
+                "MX": "/microblaze_riscv_0",
+                "MI": "M_AXI_DP",
+                "MS": "SEG_axi_bram_ctrl_gain_Mem0",
+                "MV": "xilinx.com:ip:microblaze_riscv:1.0",
+                "SX": "/axi_bram_ctrl_gain",
+                "SI": "S_AXI",
+                "SS": "Mem0",
+                "SV": "xilinx.com:ip:axi_bram_ctrl:4.1",
+                "TM": "data",
+                "TU": "memory"
+            },
+            "V19": {
+                "VT": "AC",
+                "BA": "0xC2000000",
+                "HA": "0xC207FFFF",
+                "BP": "C_S_AXI_BASEADDR",
+                "HP": "C_S_AXI_HIGHADDR",
+                "MA": "Data",
+                "MX": "/microblaze_riscv_0",
+                "MI": "M_AXI_DP",
+                "MS": "SEG_axi_bram_ctrl_offset_Mem0",
+                "MV": "xilinx.com:ip:microblaze_riscv:1.0",
+                "SX": "/axi_bram_ctrl_offset",
+                "SI": "S_AXI",
+                "SS": "Mem0",
+                "SV": "xilinx.com:ip:axi_bram_ctrl:4.1",
+                "TM": "data",
+                "TU": "memory"
             }
         },
         "edges": [
@@ -524,6 +578,21 @@
             },
             {
                 "src": "V16",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V17",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V18",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V19",
                 "trg": "V2",
                 "EH": "2"
             }
