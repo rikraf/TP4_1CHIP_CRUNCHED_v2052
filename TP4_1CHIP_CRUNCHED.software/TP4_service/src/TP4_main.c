@@ -27,6 +27,7 @@
 //////////////////// GLOBAL VARIABLES ///////////////////////////////
 static u8 send_buf[UDP_SEND_BUFSIZE];
 static u8 hk_send_buf[64];
+u8 hk_mode = 0;    // 0 = temperatures only, 1 = temperatures + ASIC values
 
 //These timers are used for TCP
 volatile int TcpFastTmrFlag;
@@ -85,9 +86,6 @@ u8 Temp4[2];
 u8 i2c_mux[2];
 u8 i2c_mux_rd[2];
 u8 iic_temp_cmd[1] = {0x00};
-u8 iic_conf_cmd[1] = {0x01};
-u8 iic_tlow_cmd[2] = {0x02};
-u8 iic_thi_cmd[3] = {0x03};
 
 u16 read_resp_errors = 0;
 u16 write_resp_errors = 0;
@@ -659,7 +657,6 @@ recv_callback(void *arg, struct udp_pcb *tpcb,
 			u8 num_packets = 0;
 			u8 num_reads = 0;
 			u8 top = cmdp[1] & 1;
-  			u8 send_buf[UDP_SEND_BUFSIZE];
 			for (num_packets = 0; num_packets < 113; num_packets++)
 				{
 				xil_printf("sending bulk read command\n\r");
@@ -699,7 +696,7 @@ recv_callback(void *arg, struct udp_pcb *tpcb,
 
 	    	hk_interval_timer = 0;
 	    	HK_rate = cmdp[1];
-	    	//I added the following to read out some of the TEMAC registers to understand why
+    		hk_mode = cmdp[2];     // 0 = TMP102 only (safe any time), 1 = + ASIC	    	//I added the following to read out some of the TEMAC registers to understand why
 	    	//  there are packet failures.
 	    	/*
 	    	if (HK_rate == 0)
@@ -740,7 +737,102 @@ recv_callback(void *arg, struct udp_pcb *tpcb,
 	    case 0x25:        // Write i2c MUX
 	      SetIICMux(1);
 		  break;
+		case 0x26:        // Set TMP102 over-temperature trip points
+		{
+			//Packet structure:
+			//cmdp[0]   = 0x26
+    		//cmdp[1]   = reserved, 0
+    		//cmdp[2:3] = T_HIGH, 16-bit left-justified, big-endian
+    		//cmdp[4:5] = T_LOW,  16-bit left-justified, big-endian
+    		//cmdp[6:7] = Configuration register, big-endian
+			u8 which;
+			u8 tbuf[3];
+			for (which = 0; which < 4; which++)
+			{
+				// Configuration register first. Must keep TM=0 (comparator mode) and
+				// POL=0 (ALERT active low) or the hardware interlock will not work.
+				tbuf[0] = 0x01;  tbuf[1] = cmdp[6];  tbuf[2] = cmdp[7];
+				XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, tbuf, 3, XIIC_STOP);
+				if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) {
+				xil_printf("TMP102 %d: bus error writing CONFIG\n\r", which);
+				break;
+				}
+				// T_LOW is the release point (hysteresis), not a cold alarm.
+				tbuf[0] = 0x02;  tbuf[1] = cmdp[4];  tbuf[2] = cmdp[5];
+				XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, tbuf, 3, XIIC_STOP);
+				if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) {
+				xil_printf("TMP102 %d: bus error writing TLOW\n\r", which);
+				break;
+				}
+				// T_HIGH is the trip point.
+				tbuf[0] = 0x03;  tbuf[1] = cmdp[2];  tbuf[2] = cmdp[3];
+				XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, tbuf, 3, XIIC_STOP);
+				if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) {
+				xil_printf("TMP102 %d: bus error writing THIGH\n\r", which);
+				break;
+				}
+				xil_printf("TMP102 %d: CFG=%02x%02x TLOW=%02x%02x THIGH=%02x%02x\n\r",
+						which, cmdp[6], cmdp[7], cmdp[4], cmdp[5], cmdp[2], cmdp[3]);
+			}
+		}
+		break;
+    case 0x27:        // Read back TMP102 trip points
+	//Reply layout: 2 marker bytes then 4 bytes per sensor.
+    //send_buf[0]      = 0xA5
+    //send_buf[1]      = 0x27
+    //send_buf[2+4*n]  = T_HIGH MSB for sensor n
+    //send_buf[3+4*n]  = T_HIGH LSB
+    //send_buf[4+4*n]  = T_LOW MSB
+    //send_buf[5+4*n]  = T_LOW LSB
 
+    {
+      u8 which;
+      u8 ptrbuf[1];   // not named pbuf - this file already uses lwIP's struct pbuf
+      send_buf[0] = 0xA5;
+      send_buf[1] = 0x27;
+      for (which = 0; which < 4; which++)
+      {
+        ptrbuf[0] = 0x03;                                 // point at THIGH
+        XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, ptrbuf, 1, XIIC_STOP);
+        if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) break;
+        XIic_Recv(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, send_buf + 2 + 4*which, 2, XIIC_STOP);
+        if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) break;
+
+        ptrbuf[0] = 0x02;                                 // point at TLOW
+        XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, ptrbuf, 1, XIIC_STOP);
+        if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) break;
+        XIic_Recv(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, send_buf + 4 + 4*which, 2, XIIC_STOP);
+        if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) break;
+      }
+      udp_cmd_reply(18);
+      // Leave the pointer back on the temperature register so SendHK() still works.
+      for (which = 0; which < 4; which++) {
+        XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, iic_temp_cmd, 1, XIIC_STOP);
+        XIic_WaitBusFree(IIC_BASE_ADDRESS);
+      }
+    }
+    break;
+    case 0x28:        // Read the four TMP102 temperatures, I2C only
+    {
+      u8 which;
+      send_buf[0] = 0xA5;
+      send_buf[1] = 0x28;
+      for (which = 0; which < 4; which++)
+      {
+        XIic_Send(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, iic_temp_cmd, 1, XIIC_STOP);
+        if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) {
+          xil_printf("TMP102 %d: bus error\n\r", which);
+          break;
+        }
+        XIic_Recv(IIC_BASE_ADDRESS, TEMPSENSOR1 + which, send_buf + 2 + 2*which, 2, XIIC_STOP);
+        if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) {
+          xil_printf("TMP102 %d: bus error\n\r", which);
+          break;
+        }
+      }
+      udp_cmd_reply(10);
+    }
+    break;
 	    case 0x30:       // open shutter
 	    	//Pulse the T0_Sync high then low
 	        //Xil_Out32(T0_SYNC_ADDR, 1);
@@ -811,8 +903,6 @@ int read_response(int cmd, int words)
   u32 packet_fifo_count;
   u32 buf;
   char temp[9];
-//#define UDP_SEND_BUFSIZE 1440 // this is defined in TP4_main.h
-  //u8 send_buf[UDP_SEND_BUFSIZE];  //defined globally
   int i,j,k;
   //int fifo_empty;
   int read;
@@ -929,7 +1019,6 @@ int check_wresponse(int cmd)
 }
 static void send_ok(u16 ser_no)
 {
-  //u8 send_buf[24];
   //xil_printf("%d ",ser_no);
   //if (ser_no != last_write_resp_serno+1)xil_printf("***\n ");
   //last_write_resp_serno = ser_no;
@@ -944,6 +1033,15 @@ static void send_ok(u16 ser_no)
   if (err != ERR_OK) xil_printf("Error %d", err);
   pbuf_free(ok_pbuf);
 }
+static void udp_cmd_reply(int len)
+{
+	cmd_pbuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
+	memcpy(cmd_pbuf->payload, send_buf, len);
+	err_t err = udp_send(cmd_pcb, cmd_pbuf);
+	if (err != ERR_OK) xil_printf("Error %d", err);
+	pbuf_free(cmd_pbuf);
+}
+
 static void udp_hk_packet_send(int len)
 {
 	//debug_eth_fifo();
@@ -956,6 +1054,12 @@ static void udp_hk_packet_send(int len)
 }
 void SendHK(void)
 {
+	//Put in 4 bytes to identify which kind of packet
+    hk_send_buf[0] = 0xA5;	 		//marker
+    hk_send_buf[1] = 0x20;         	//packet type: housekeeping
+    hk_send_buf[2] = hk_mode;       // 0 = temps only, 1 = temps + ASIC
+    hk_send_buf[3] = 0;   			//reserved, keeps the data 4-byte aligned
+	
 	volatile int delay;
 	u8 which_temp;
 	for (which_temp = 0; which_temp < 4; which_temp++)
@@ -966,7 +1070,9 @@ void SendHK(void)
 			xil_printf("Error waiting for bus!\n");
 			break;
 			}
-		XIic_Recv(IIC_BASE_ADDRESS, TEMPSENSOR1 + which_temp, hk_send_buf + 2*which_temp, 2, XIIC_STOP);
+		//XIic_Recv(IIC_BASE_ADDRESS, TEMPSENSOR1 + which_temp, hk_send_buf + 2*which_temp, 2, XIIC_STOP);
+		//Leave space for the four header bytes
+		XIic_Recv(IIC_BASE_ADDRESS, TEMPSENSOR1 + which_temp, hk_send_buf + 4 + 2*which_temp, 2, XIIC_STOP);
 		//xil_printf("%d %d \n\r", hk_send_buf[2*which_temp],hk_send_buf[2*which_temp+1]);
 		//xil_printf("Temp%d %d \n\r", which_temp, ((hk_send_buf[2*which_temp])<<4) + ((hk_send_buf[2*which_temp+1])>>4));
 		if (XIic_WaitBusFree(IIC_BASE_ADDRESS) != XST_SUCCESS) {
@@ -1004,24 +1110,32 @@ void SendHK(void)
 			(SEL_DACOUT_BUFF<<28) | (SEL_PSAN_3<<22),
 			(SEL_DACOUT_BUFF<<28) | (SEL_PSDG_3<<22)
 	};
-	for (which_temp = 0; which_temp < 4; which_temp++)
+	if (hk_mode == 1)
 	{
-		empty_fifo();
-		//Write the MUX to select the analog input to the ADC
-		WriteASICReg32(0xa01a, reg_a01a_vals[which_temp]);
-		//Settling time
-		for (delay = 0; delay < TSETTLE; delay++);
-		//The ASIC sends back a response to the command, need to wait for this
-		u32 vals[2];
-		u32 stat = check_resp_FIFO(2, vals);
-		u32 adc_val = Read_TP4_ADC();
-		//xil_printf("HK val %d = %d\n", which_temp, adc_val);
-		//ADC values are 32b but just keep the top 16 and pack them Big-Endian
-		*(hk_send_buf + 8 + 2*which_temp) = adc_val>>24;
-		*(hk_send_buf + 9 + 2*which_temp) = adc_val>>16;
+		for (which_temp = 0; which_temp < 4; which_temp++)
+		{
+			empty_fifo();
+			//Write the MUX to select the analog input to the ADC
+			WriteASICReg32(0xa01a, reg_a01a_vals[which_temp]);
+			//Settling time
+			for (delay = 0; delay < TSETTLE; delay++);
+			//The ASIC sends back a response to the command, need to wait for this
+			u32 vals[2];
+			u32 stat = check_resp_FIFO(2, vals);
+			u32 adc_val = Read_TP4_ADC();
+			//xil_printf("HK val %d = %d\n", which_temp, adc_val);
+			//ADC values are 32b but just keep the top 16 and pack them Big-Endian
+			//Leave space for the four header bytes
+			//*(hk_send_buf + 8 + 2*which_temp) = adc_val>>24;
+			//*(hk_send_buf + 9 + 2*which_temp) = adc_val>>16;
+			*(hk_send_buf + 12 + 2*which_temp) = adc_val>>24;
+			*(hk_send_buf + 13 + 2*which_temp) = adc_val>>16;
+		}
 	}
+	udp_hk_packet_send(hk_mode == 1 ? 20 : 12);
+#else
+	udp_hk_packet_send(12);
 #endif
-	udp_hk_packet_send(20);
 }
 
 void SetIICMux(u16 val)

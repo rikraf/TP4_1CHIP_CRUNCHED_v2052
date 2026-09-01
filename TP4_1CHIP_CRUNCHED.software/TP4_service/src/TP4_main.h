@@ -190,5 +190,6 @@ void PHY_DumpRegs(void);
 void PHY_Write(u32 reg, u16 data);
 void PHY_WriteExt(u32 reg, u16 data);
 int read_bulk_resp(u8* send_buf);
+static void udp_cmd_reply(int len);
 
 
